@@ -30,12 +30,6 @@ jobs:
           TF_VAR_aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: terraform init -upgrade
 
-      - name: Download Terraform Plan
-        uses: actions/download-artifact@v3
-        with:
-          name: tfplan
-          path: tfplan  
-
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -44,4 +38,4 @@ jobs:
       - name: Terraform Apply
         run: |
           cd poc  
-          terraform apply -auto-approve tfplan/tfplan  
+          terraform apply -auto-approve  
