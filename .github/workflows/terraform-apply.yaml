@@ -1,4 +1,4 @@
-name: Terraform Apply
+name: Terraform apply
 
 on:
   workflow_dispatch:
@@ -28,7 +28,9 @@ jobs:
         env:
           TF_VAR_aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           TF_VAR_aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: terraform init -upgrade
+        run: |
+          cd poc 
+          terraform init -upgrade
 
       - name: Download Terraform Plan
         uses: actions/download-artifact@v3
@@ -37,4 +39,6 @@ jobs:
           path: poc
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
+        run: | 
+          cd poc 
+          terraform apply -auto-approve tfplan
