@@ -34,7 +34,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: tfplan
-          path: poc
+          path: tfplan
 
       - name: Terraform Apply
         run: | 
