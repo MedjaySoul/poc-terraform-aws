@@ -53,6 +53,8 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
+        working-directory: poc
+
         id: plan
         run: terraform plan -out=tfplan
 
