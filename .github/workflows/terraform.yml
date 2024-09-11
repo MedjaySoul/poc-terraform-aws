@@ -26,7 +26,7 @@ jobs:
         run: pip install checkov
 
       - name: Run Checkov
-        run: checkov -d . --output cli
+        run: checkov -d ./poc --output cli
 
   terraform-plan:
     name: Terraform Plan
