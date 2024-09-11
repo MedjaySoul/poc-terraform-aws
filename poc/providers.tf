@@ -1,5 +1,11 @@
 
 terraform {
+  backend "s3" {
+    bucket         = "tf-state-3"  # Remove extra double quotes
+    key            = "terraform/state.tfstate"
+    region         = "us-east-2"
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -18,6 +24,6 @@ terraform {
       version = "~> 2.3.4"
     }
   }
+
   required_version = "~> 1.3"
 }
-
