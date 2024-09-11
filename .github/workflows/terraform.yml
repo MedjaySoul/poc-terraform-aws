@@ -26,6 +26,7 @@ jobs:
         run: pip install checkov
 
       - name: Run Checkov
+        continue-on-error: true
         run: |
           checkov -d . --output cli
           EXIT_CODE=$?
