@@ -53,17 +53,16 @@ jobs:
         working-directory: poc
         run: terraform init -upgrade
 
-      - name: Terraform Plan
-        working-directory: poc
-        id: plan
-        run: terraform plan -out=tfplan
+      - name: Run Terraform Plan
+        run: |
+          cd poc
+          terraform plan -out=tfplan
 
       - name: Upload Terraform Plan
         uses: actions/upload-artifact@v3
-        working-directory: poc
         with:
           name: tfplan
-          path: tfplan
+          path: poc
 
   manual-approval:
     name: Manual Approval
