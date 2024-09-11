@@ -77,38 +77,4 @@ jobs:
           name: tfplan
           path: poc
 
-  manual-approval:
-    name: Manual Approval
-    runs-on: ubuntu-latest
-    needs: terraform-plan
-    if: github.event_name == 'push'
-
-    steps:
-      - name: Request manual approval
-        uses: github-action/manual-approval@v1
-        with:
-          approval_message: "Please review the Terraform plan and approve the deployment."
-
-  apply-terraform:
-    name: Apply Terraform
-    runs-on: ubuntu-latest
-    needs: manual-approval
-    if: github.event_name == 'push'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.5.2
-
-      - name: Terraform Init
-        run: terraform init
-
-      - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
-        env:
-          TF_VAR_aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          TF_VAR_aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+ 
