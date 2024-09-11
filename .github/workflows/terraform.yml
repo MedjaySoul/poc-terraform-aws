@@ -51,9 +51,15 @@ jobs:
 
       - name: Terraform Init
         working-directory: poc
+        env:
+          TF_VAR_aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          TF_VAR_aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: terraform init -upgrade
 
       - name: Run Terraform Plan
+        env:
+            TF_VAR_aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            TF_VAR_aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           cd poc
           terraform plan -out=tfplan
